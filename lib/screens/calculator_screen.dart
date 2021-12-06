@@ -3,6 +3,7 @@ import 'package:simple_calculator_2/controllers/calc_results_sp.dart';
 import 'package:simple_calculator_2/models/calc_results_history.dart';
 import 'bottom_bar.dart';
 import 'dart:math';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 
 class CalculatorScreen extends StatefulWidget {
@@ -16,6 +17,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   final TextEditingController firstNumberController = TextEditingController();
   final TextEditingController secondNumberController = TextEditingController();
   final CalcResultSp resultSp = CalcResultSp();           //we need an instance of CalcResultSp from calc_results_sp.dart that we use to write and read data from SP
+  CollectionReference fbresults = FirebaseFirestore.instance.collection('fbresults');
 
   double resultAdd = 0; //variables for results of operations
   double resultSubtract = 0;
@@ -24,6 +26,11 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   num resultPower = 0;
   double first = 0;
   double second = 0;
+  String fbAddResult = '';
+  String fbSubtractResult = '';
+  String fbMultiplyResult = '';
+  String fbDivideResult = '';
+  String fbPowerResult = '';
 
   //function for calculations, will not return anything, only does calculations
   void calculate() {
@@ -67,15 +74,26 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     });
   }
 
-  void calculateSave(){    //method to calculate and save when CALCULATE button is pressed
+  void calculateSave(){    //method to calculate and save data when CALCULATE button is pressed
     calculate();
     saveResults();
+    sendResultsToFirestore();
   }
 
   @override
   void initState() {                //when we call writeResults method, we want to make sure that SP have been initialised
     resultSp.init();                //initialise SP calling resultSp.init()
     super.initState();
+  }
+
+  //method for saving calculation results to Firestore
+  Future<void> sendResultsToFirestore() async {
+    fbAddResult = '${first} + ${second} = ${resultAdd}';
+    fbSubtractResult = '${first} - ${second} = ${resultSubtract}';
+    fbMultiplyResult = '${first} x ${second} = ${resultMultiply}';
+    fbDivideResult = '${first} : ${second} = ${resultDivide}';
+    fbPowerResult = '${first} ^ ${second} = ${resultPower}';
+    fbresults.add({'fbAddResult':fbAddResult,'fbSubtractResult':fbSubtractResult,'fbMultiplyResult':fbMultiplyResult,'fbDivideResult':fbDivideResult,'fbPowerResult':fbPowerResult});
   }
 
   @override

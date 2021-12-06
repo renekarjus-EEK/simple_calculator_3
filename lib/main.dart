@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'screens/calculator_screen.dart';
 import 'screens/converter_screen.dart';
 import 'screens/calchistory_screen.dart';
+import 'screens/firebase_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const SimpleCalculator());
 }
 
@@ -25,6 +29,7 @@ class SimpleCalculator extends StatelessWidget {
         '/': (context) => CalculatorScreen(),
         '/calchistory': (context) => CalculatorHistory(),
         '/converter': (context) => ConverterScreen(),
+        '/fbhistory': (context) => FirebaseResults(),
       },
       initialRoute: '/',   //first screen to show
     );

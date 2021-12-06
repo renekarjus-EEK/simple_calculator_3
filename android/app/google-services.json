@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "813844046445",
+    "project_id": "simple-calculator-2",
+    "storage_bucket": "simple-calculator-2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:813844046445:android:7cd46a58b3e840b62b9564",
+        "android_client_info": {
+          "package_name": "com.example.simple_calculator_2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "813844046445-7o9gjs20o69vpdaihd9m03vdpdrvkqb4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDz-mP9bY6KNZjQWaTS7TyrTl2o9I6eGeA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "813844046445-7o9gjs20o69vpdaihd9m03vdpdrvkqb4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

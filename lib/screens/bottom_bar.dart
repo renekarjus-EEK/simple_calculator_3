@@ -21,15 +21,20 @@ class BottomBar extends StatelessWidget {
           case 2:
             Navigator.pushNamed(context, '/converter');
             break;
+          case 3:
+            Navigator.pushNamed(context, '/fbhistory');
+            break;
         }
       },
       items: [
         BottomNavigationBarItem(
             icon: Icon(Icons.calculate), label: 'Calculator'),
         BottomNavigationBarItem(
-            icon: Icon(Icons.history), label: 'Calculator history'),
+            icon: Icon(Icons.history), label: ''),
         BottomNavigationBarItem(
-            icon: Icon(Icons.compare_arrows), label: 'Km <-> Miles')
+            icon: Icon(Icons.compare_arrows), label: ''),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.cloud_circle_outlined), label: ''),
       ],
     );
   }
