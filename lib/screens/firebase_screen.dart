@@ -10,8 +10,8 @@ class FirebaseResults extends StatefulWidget {
 }
 
 class _FirebaseResultsState extends State<FirebaseResults> {
-  final Stream<QuerySnapshot> results =
-      FirebaseFirestore.instance.collection('fbresults').snapshots();
+  final Future<QuerySnapshot> results = FirebaseFirestore.instance.collection('fbresults').get();
+  //FirebaseFirestore.instance.collection('fbresults').snapshots();
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +21,8 @@ class _FirebaseResultsState extends State<FirebaseResults> {
       ),
       body:
           Container(
-            child: StreamBuilder<QuerySnapshot>(
-              stream: results,
+            child: FutureBuilder<QuerySnapshot>(
+              future: results,
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting){
@@ -32,7 +32,19 @@ class _FirebaseResultsState extends State<FirebaseResults> {
                     return ListView.builder(
                       itemCount: data.size,
                       itemBuilder: (context, index){
-                        return Text('${data.docs[index]['fbAddResult']} | ${data.docs[index]['fbSubtractResult']} | ${data.docs[index]['fbMultiplyResult']} | ${data.docs[index]['fbDivideResult']} | ${data.docs[index]['fbPowerResult']}');
+                        //return Text('${data.docs[index]['fbAddResult']} | ${data.docs[index]['fbSubtractResult']} | ${data.docs[index]['fbMultiplyResult']} | ${data.docs[index]['fbDivideResult']} | ${data.docs[index]['fbPowerResult']}');
+                        return Column (
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('${data.docs[index]['fbAddResult']}'),
+                            Text('${data.docs[index]['fbSubtractResult']}'),
+                            Text('${data.docs[index]['fbMultiplyResult']}'),
+                            Text('${data.docs[index]['fbDivideResult']}'),
+                            Text('${data.docs[index]['fbPowerResult']}'),
+                            const Padding(
+                              padding: EdgeInsets.symmetric(vertical: 8),),
+                          ],
+                        );
                       },
                     );
               },
